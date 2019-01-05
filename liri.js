@@ -1,9 +1,9 @@
-var Twitter = require("twitter");
-var Spotify = require("node-spotify-api");
-var keys = require("./keys.js");
-var dotenv = require("dotenv").config();
-var request = require("request");
-var fs = require("fs")
+const Twitter = require("twitter");
+const Spotify = require("node-spotify-api");
+const keys = require("./keys.js");
+const dotenv = require("dotenv").config();
+const request = require("request");
+const fs = require("fs")
 
 var command = process.argv[2];
 var liriArgs = process.argv.slice(3).join("+");
@@ -41,14 +41,14 @@ function startApp(command, liriArgs) {
 
 // Twitter function
 function tweets() {
-    var client = new Twitter(keys.twitter);
+    const client = new Twitter(keys.twitter);
     client.get("statuses/user_timeline", function (error, tweets, response) {
         if (!error) {
             tweets.forEach(tweet => {
                 let tweets = [
                     "Username: " + tweet.user.name,
                     "Tweet Time: " + tweet.created_at,
-                    "Tweet COntent: " + tweet.text
+                    "Tweet Content: " + tweet.text
                 ].join("\n");
 
                 console.log(tweets);
