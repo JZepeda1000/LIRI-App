@@ -29,20 +29,20 @@ function startApp(command, liriArgs) {
                 movie(liriArgs);
             }
             break;
-        case "do-what-it-says":
-            printCommand();
-            doAsTold();
-            break;
-        default:
-            console.log("Error! \nPleae enter a valid command.")
-            break;
+        // case "do-what-it-says":
+        //     printCommand();
+        //     doAsTold();
+        //     break;
+        // default:
+        //     console.log("Error! \nPlease enter a valid command.")
+        //     break;
     };
 }
 
 // Twitter function
 function tweets() {
-    var clientTW = new Twitter(keys.twitter);
-    clientTW.get("statuses/user_timeline", function (error, tweets, response) {
+    var client = new Twitter(keys.twitter);
+    client.get("statuses/user_timeline", function (error, tweets, response) {
         if (!error) {
             tweets.forEach(tweet => {
                 let tweets = [
