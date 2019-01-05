@@ -16,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/JoshZepedaUMNStudent/LIRI-App/issues"
   },
-  "homepage": "https://github.com/JoshZepedaUMNStudent/LIRI-App#readme"
+  "homepage": "https://github.com/JoshZepedaUMNStudent/LIRI-App#readme",
+  "dependencies": {
+    "dotenv": "^6.2.0",
+    "fs": "0.0.1-security",
+    "node": "^11.6.0",
+    "node-spotify-api": "^1.0.7",
+    "request": "^2.88.0",
+    "twitter": "^1.7.1"
+  }
 }
