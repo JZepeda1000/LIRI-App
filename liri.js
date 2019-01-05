@@ -29,13 +29,13 @@ function startApp(command, liriArgs) {
                 movie(liriArgs);
             }
             break;
-        // case "do-what-it-says":
-        //     printCommand();
-        //     doAsTold();
-        //     break;
-        // default:
-        //     console.log("Error! \nPlease enter a valid command.")
-        //     break;
+        case "do-what-it-says":
+            printCommand();
+            doWhatItSays();
+            break;
+        default:
+            console.log("Error! \nPlease enter a valid command.")
+            break;
     };
 }
 
@@ -113,6 +113,19 @@ function movie(liriArgs) {
             })
             console.log(movies);
         }
+    })
+};
+
+// Do-What-It-Says function
+function doWhatItSays() {
+    fs.readFile("random.txt", "utf8", function (error, data) {
+        if (error) {
+            return console.log(error);
+        }
+
+        var dataArray = data.split(",");
+        console.log(dataArray);
+        startApp(dataArray[0], dataArray[1]);
     })
 };
 
