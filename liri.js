@@ -13,11 +13,16 @@ function startApp(command, liriArgs) {
     switch (command) {
         case "my-tweets":
             printCommand();
-            tweets();
+            tweets(liriArgs);
             break;
         case "spotify-this-song":
             printCommand();
+            if (liriArgs.length === 0) {
+                liriArgs = "On the Loose";
+            }
+            else {
             Spotify(liriArgs);
+            }
             break;
         case "movie-this":
             printCommand();
@@ -42,31 +47,22 @@ function startApp(command, liriArgs) {
 // Twitter function
 function tweets() {
     const client = new Twitter(keys.twitter);
-    client.get("statuses/user_timeline", function (error, tweets, response) {
+    client.get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=twitterapi&count=2", function (error, tweets, response) {
         if (!error) {
-            tweets.forEach(tweet => {
-                let tweets = [
-                    "Username: " + tweet.user.name,
-                    "Tweet Time: " + tweet.created_at,
-                    "Tweet Content: " + tweet.text
-                ].join("\n");
-
-                console.log(tweets);
-                fs.appendFile("log.txt", tweets, function(err) {
-                    if(err) throw err;
-                })
+            console.log(tweets);
+            fs.appendFile("log.txt", tweets, function (error) {
+                if (error) throw error;
             })
         }
         else {
-            console.log("No Tweets to Display")
+            console.log("No Tweets to Show")
         }
     })
-}
 
+};
+
+// Spotify function
 function spotify(liriArgs) {
-    if (liriArgs.length === 0) {
-        liriArgs = "Of Crime and Passion";
-    }
     const spotify = new Spotify(keys.spotify);
     spotify.search({ type: "track", query: liriArgs, limit: 1}, function (err, data) {
 
