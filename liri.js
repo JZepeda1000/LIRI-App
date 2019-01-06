@@ -47,19 +47,28 @@ function startApp(command, liriArgs) {
 // Twitter function
 function tweets() {
     const client = new Twitter(keys.twitter);
-    client.get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=twitterapi&count=2", function (error, tweets, response) {
+    client.get("https://api.twitter.com/1.1/statuses/user_timeline.json", function (error, tweets, response) {
         if (!error) {
-            console.log(tweets);
-            fs.appendFile("log.txt", tweets, function (error) {
-                if (error) throw error;
-            })
+            tweets.forEach(tweet => {
+
+                let tweets = [
+                    "Username: " + tweet.user.name,
+                    "Tweet Time: " + tweet.created_at,
+                    "Tweet Content: " + tweet.text
+                ].join('\n');
+
+                console.log(tweets);
+                fs.appendFile("log.txt", tweets + divider, function (err) {
+                    if (err) throw err;
+                });
+            });
         }
         else {
             console.log("No Tweets to Show")
         }
-    })
+    });
 
-};
+}
 
 // Spotify function
 function spotify(liriArgs) {
