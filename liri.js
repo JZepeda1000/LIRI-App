@@ -13,26 +13,20 @@ function startApp(command, liriArgs) {
     switch (command) {
         case "my-tweets":
             printCommand();
-            tweets(liriArgs);
+            tweets();
             break;
         case "spotify-this-song":
             printCommand();
-            if (liriArgs.length === 0) {
-                liriArgs = "On the Loose";
-            }
-            else {
             Spotify(liriArgs);
-            }
             break;
         case "movie-this":
             printCommand();
             if (liriArgs === "") {
                 liriArgs = "Casablanca";
-            movie(liriArgs);
-            }
-            else {
+            } else {
                 movie(liriArgs);
             }
+            movie(liriArgs);
             break;
         case "do-what-it-says":
             printCommand();
@@ -47,10 +41,10 @@ function startApp(command, liriArgs) {
 // Twitter function
 function tweets() {
     const client = new Twitter(keys.twitter);
-    client.get("https://api.twitter.com/1.1/statuses/user_timeline.json", function (error, tweets, response) {
+    client.get('statuses/user_timeline', function (error, tweets, response) {
         if (!error) {
             tweets.forEach(tweet => {
-
+                
                 let tweets = [
                     "Username: " + tweet.user.name,
                     "Tweet Time: " + tweet.created_at,
