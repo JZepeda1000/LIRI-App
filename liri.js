@@ -41,10 +41,10 @@ function startApp(command, liriArgs) {
 // Twitter function
 function tweets() {
     const client = new Twitter(keys.twitter);
-    client.get('statuses/user_timeline', function (error, tweets, response) {
+    client.get("statuses/user_timeline", function (error, tweets, response) {
         if (!error) {
             tweets.forEach(tweet => {
-                
+
                 let tweets = [
                     "Username: " + tweet.user.name,
                     "Tweet Time: " + tweet.created_at,
